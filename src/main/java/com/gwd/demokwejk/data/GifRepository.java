@@ -36,5 +36,16 @@ public class GifRepository {
         return favoritesGifs;
     }
 
+    public static List<Gif> getGifsById(int id) {
+
+        List<Gif> gifsById = new ArrayList<>();
+        for (Gif g : ALL_GIFS) {
+            if (g.getCategoryId() == id) {
+                gifsById.add(g);
+            }
+        }
+        return gifsById;
+    }
+
 
 }

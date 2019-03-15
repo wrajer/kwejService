@@ -19,6 +19,8 @@ public class GifController {
     @Autowired
     private GifRepository gifRepository;
 
+
+
    // @ResponseBody // wtedy aby zwracał nam w html to co chcemy widziaeć, ważne do testwo
 @RequestMapping("/")
 public String listGifs(ModelMap modelMap) {
