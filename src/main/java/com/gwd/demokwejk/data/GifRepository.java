@@ -3,6 +3,7 @@ package com.gwd.demokwejk.data;
 import com.gwd.demokwejk.model.Gif;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -16,10 +17,23 @@ public class GifRepository {
             new Gif("cowboy-coder", "user2", false, 1),
             new Gif("compiler-bot", "user3", true, 3),
             new Gif("book-dominos", "user4", false, 2),
-            new Gif("ben-and-mike", "user5", true, 1) );
+            new Gif("ben-and-mike", "user5", true, 1));
 
     public static List<Gif> getAllGifs() {
         return ALL_GIFS;
+    }
+
+    public static List<Gif> getFavoritesGifs() {
+
+        List<Gif> favoritesGifs = new ArrayList<>();
+
+        for (Gif g : ALL_GIFS) {
+            if (g.getFavorite() == true) {
+                favoritesGifs.add(g);
+            }
+        }
+
+        return favoritesGifs;
     }
 
 

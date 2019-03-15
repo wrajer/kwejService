@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -27,6 +28,15 @@ public String listGifs(ModelMap modelMap) {
 
     return "home";
 }
+
+    @RequestMapping("/favorites")
+    public String gifFavorites(ModelMap modelMap) {
+
+     modelMap.put("gifs", gifRepository.getFavoritesGifs());
+
+        return "favorites";
+    }
+
 
 
 }
