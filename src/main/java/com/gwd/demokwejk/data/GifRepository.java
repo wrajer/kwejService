@@ -47,5 +47,26 @@ public class GifRepository {
         return gifsById;
     }
 
+    public static List<Gif> getGifsByName(String q) {
+
+        List<Gif> GifsByName = new ArrayList<>();
+        for (Gif g : ALL_GIFS) {
+            if (g.getName().contains(q)) {
+                GifsByName.add(g);
+            }
+        }
+        return GifsByName;
+    }
+
+    public static Gif getGifWithName(String q) {
+
+
+        for (Gif g : ALL_GIFS) {
+            if (g.getName().contains(q)) {
+                return g;
+            }
+        }
+        return null;
+    }
 
 }

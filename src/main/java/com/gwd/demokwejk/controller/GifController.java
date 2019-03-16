@@ -5,10 +5,7 @@ import com.gwd.demokwejk.model.Gif;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,25 +17,37 @@ public class GifController {
     private GifRepository gifRepository;
 
 
+    // @ResponseBody // wtedy aby zwracał nam w html to co chcemy widziaeć, ważne do testwo
+    @RequestMapping("/")
+    public String listGifs(@RequestParam(required = false) String q, ModelMap modelMap) {
 
-   // @ResponseBody // wtedy aby zwracał nam w html to co chcemy widziaeć, ważne do testwo
-@RequestMapping("/")
-public String listGifs(ModelMap modelMap) {
 
-        List<Gif> gifs = gifRepository.getAllGifs();
-        modelMap.put("gifs", gifs);
+        if (q == null) {
+            List<Gif> gifs = gifRepository.getAllGifs();
+            modelMap.put("gifs", gifs);
+        } else {
+            modelMap.put("gifs", gifRepository.getGifsByName(q));
+        }
 
-    return "home";
-}
+
+        return "home";
+    }
 
     @RequestMapping("/favorites")
     public String gifFavorites(ModelMap modelMap) {
 
-     modelMap.put("gifs", gifRepository.getFavoritesGifs());
+        modelMap.put("gifs", gifRepository.getFavoritesGifs());
 
         return "favorites";
     }
 
+    @RequestMapping("/gif/{name}")
+    public String gitGifWithName(@PathVariable String name, ModelMap modelMap) {
+
+        modelMap.put("category", gifRepository.getGifWithName(name));
+
+        return "category";
+    }
 
 
 }
